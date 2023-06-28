@@ -1,6 +1,41 @@
-.tiles {
+/* .tiles {
   display: flex;
   align-items: center;
   width: 100%;
   gap: 20px;
+} */
+
+.landing-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-items: flex-start; /* Adjust vertical alignment to flex-start */
+  padding-top: 50px; /* Increase top padding to move the hero up */
+}
+
+.hero-image {
+  background-size: cover;
+  background-position: center;
+  width: 60%;
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.landing-content {
+  text-align: center;
+  color: white;
+}
+
+.landing-title {
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.landing-description {
+  font-size: 20px;
 }
