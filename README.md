@@ -392,7 +392,7 @@ Here are the pieces of functionality that should be built out for the backend:
     - [x] Use the `dotenv` package to parse the environment variables from the `.env` file.
     - [x] Export each of the environment variables from the `config.js` file until the tests pass
     - [x] Write a `getDatabaseUri` function so that all the tests pass
-  - [ ] Commit all work to `git`
+  - [x] Commit all work to `git`
   - [ ] The project should now be ready to go!
 - [ ] **PostgreSQL database**
   - Time bring in a PostgreSQL database client as the application's persistence layer
@@ -481,13 +481,13 @@ Here are the pieces of functionality that should be built out for the backend:
     - [ ] In the `models/user.test.js` file:
       - [ ] Test the `login` method. Write test cases for:
         - [ ] User can login successfully with proper credentials
-        - [ ] Unknown email throws `UnauthorizedError`
-        - [ ] Invalid credentials throws `UnauthorizedError`
+        - [x] Unknown email throws `UnauthorizedError`
+        - [x] Invalid credentials throws `UnauthorizedError`
       - [ ] Test the `register` method. Write test cases for:
         - [ ] User can successfully register with proper credentials
-        - [ ] Registering with duplicate email throws `BadRequestError`
-        - [ ] Registering with duplicate username throws `BadRequestError`
-        - [ ] Registering with invalid email throws `BadRequestError`
+        - [x] Registering with duplicate email throws `BadRequestError`
+        - [x] Registering with duplicate username throws `BadRequestError`
+        - [ x] Registering with invalid email throws `BadRequestError`
       - [ ] Test the `fetchUserByEmail` method:. Write test cases for:
         - [ ] A valid email returns a user from the database
         - [ ] Invalid emails are handled correctly

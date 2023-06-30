@@ -5,18 +5,19 @@ const config = require("../config")
 
 class User {
     static login = async (username, password) => {
-
         // check that username exists in database
-        const emailExists = this.fetchUserByEmail(email);
-        if (!emailExists) throw new UnauthorizedError;
-
+        const usernameExists = await this.fetchUserByUsername(username);
+        if (!usernameExists) {
+            throw new UnauthorizedError();
+        }
     };
+    
 
 
     static register = async (username, password, first_name, last_name, email) => {
         // handle email exists in database
-        // const user = await this.fetchUserByEmail(email);
-        // if (user) throw new BadRequestError 
+        const user = await this.fetchUserByEmail(email);
+        if (user) throw new BadRequestError("Email already in use."); 
 
         //encrypt password
         try {
@@ -42,11 +43,23 @@ class User {
         
             return createdUser;
         } catch (err) {
-            console.error("There was an error registering user", err)
-            throw new BadRequestError(err)
+            console.error("There was an error registering user", err.message);
+            throw new BadRequestError("Error registering user.");
         }
+        
     
     };
+
+    static fetchUserByUsername = async (username) => {
+        const sqlQueryFindUser = `
+            SELECT * FROM users
+            WHERE username = $1`;
+            
+        const userResult = await db.query(sqlQueryFindUser, [username]);
+        const user = userResult.rows[0];
+        return user;
+    };
+    
 
 
     // search database for given user and returns if exists
@@ -59,7 +72,7 @@ class User {
     const userResult = await db.query(sqlQueryFindUser, [email]);
 
     //store user data from query
-    const user = result.rows[0];
+    const user = userResult.rows[0];
     return user
         
 

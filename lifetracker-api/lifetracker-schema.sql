@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NULL NULL,
+    last_name VARCHAR(255) NULL,
     email VARCHAR(255) NOT NULL UNIQUE CHECK (position('@' IN email) > 1),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS activity (
     category VARCHAR(255) NOT NULL,
     calories INTEGER NOT NULL,
     image_url VARCHAR(255) NOT NULL,
-    user_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL REFERENCES users(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS exercise (
     category VARCHAR(255) NOT NULL,
     calories INTEGER NOT NULL,
     image_url VARCHAR(255) NOT NULL,
-    user_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL REFERENCES users(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS nutrition (
     category VARCHAR(255) NOT NULL,
     calories INTEGER NOT NULL,
     image_url VARCHAR(255) NOT NULL,
-    user_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL REFERENCES users(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -50,6 +50,6 @@ CREATE TABLE IF NOT EXISTS sleep (
     category   VARCHAR(255) NOT NULL,
     calories   INTEGER NOT NULL,
     image_url  VARCHAR(255) NOT NULL,
-    user_id    INTEGER NOT NULL, 
+    user_id    INTEGER NOT NULL REFERENCES users(id), 
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
