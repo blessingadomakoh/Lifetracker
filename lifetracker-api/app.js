@@ -5,7 +5,7 @@ const morgan = require("morgan")
 
 const { NotFoundError } = require("./utils/errors")
 const config = require("./config")
-const authRoutes = require("./routes/auth")
+const authRoutes = require("./routes/authRoutes")
 
 const app = express()
 
