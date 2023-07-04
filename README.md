@@ -111,46 +111,46 @@ Update the `App` component to manage authentication state:
 
 #### Implement the `Loading` Component
 
-- [ ] Build the **`Loading`** component to:
-  - [ ] Render JSX that is wrapped by an element with the class name of `loading`
-  - [ ] Render an element with the class name of `loading-message` that contains the text `"Loading"`
+- [x] Build the **`Loading`** component to:
+  - [x] Render JSX that is wrapped by an element with the class name of `loading`
+  - [x] Render an element with the class name of `loading-message` that contains the text `"Loading"`
 
 #### Implement the `Navbar` Component
 
-- [ ] Build the **`Navbar`** component to:
-  - [ ] Render JSX that is wrapped by a `nav` element with the class name of `navbar`
-  - [ ] Render the app's logo as an element with the class name of `logo`.
-    - [ ] Inside that element should be a `Link` component from `react-router-dom` that navigates the user to the `/` route when clicked.
-    - [ ] Inside that `Link` component should be the application's logo (text or image).
-  - [ ] Render the `NavLinks.jsx` component with links to each of the resources and the `/activity` route.
+- [x] Build the **`Navbar`** component to:
+  - [x] Render JSX that is wrapped by a `nav` element with the class name of `navbar`
+  - [x] Render the app's logo as an element with the class name of `logo`.
+    - [x] Inside that element should be a `Link` component from `react-router-dom` that navigates the user to the `/` route when clicked.
+    - [x] Inside that `Link` component should be the application's logo (text or image).
+  - [x] Render the `NavLinks.jsx` component with links to each of the resources and the `/activity` route.
 
 #### Implement the `NavLinks` Component
 
-- [ ] Build the **`NavLinks`** component to:
-  - [ ] Render JSX that is wrapped by an element with the class name of `nav-links`
-  - [ ] Render a `Link` element from `react-router-dom` for:
-    - [ ] The `/activity` route with a label of `Activity`.
-    - [ ] The `/nutrition` route with a label of `Nutrition`.
-    - [ ] A route for any other resource page
-  - [ ] If a valid user is logged in, it should render an element with the class name of `logout-button` that calls the `logoutUser` function when clicked.
+- [x] Build the **`NavLinks`** component to:
+  - [x] Render JSX that is wrapped by an element with the class name of `nav-links`
+  - [x] Render a `Link` element from `react-router-dom` for:
+    - [x] The `/activity` route with a label of `Activity`.
+    - [x] The `/nutrition` route with a label of `Nutrition`.
+    - [x] A route for any other resource page
+  - [x] If a valid user is logged in, it should render an element with the class name of `logout-button` that calls the `logoutUser` function when clicked.
     - [ ] The `logoutUser` function should remove the `lifetracker_token` from local storage and refresh the page so that all user data is reset.
-  - [ ] If no valid user is logged in:
-    - [ ] Render a `Link` element that redirects to the `/login` route with the label `Login`
-    - [ ] Render a `Link` element that redirects to the `/register` route with the label `Sign Up`
+  - [x] If no valid user is logged in:
+    - [x] Render a `Link` element that redirects to the `/login` route with the label `Login`
+    - [x] Render a `Link` element that redirects to the `/register` route with the label `Sign Up`
 
 #### Implement the `LoginForm` Component
 
-- [ ] Build the **`LoginForm`** component to:
-  - [ ] Render JSX that is wrapped by an element with the class name of `login-form`
-  - [ ] Render an input element for the following fields:
-    - [ ] `email`
-    - [ ] `password`
-  - [ ] Each `input` element in the form should have a class name of `form-input` and should have the following props set:
-    - [ ] `name` - the `name` of the `input` field being rendered (`email`, `password`)
-    - [ ] `type` - the type of the `input` element (`text`, `email`, `number`, etc.)
-    - [ ] `value` - the current value of the `input` element
-    - [ ] `onChange` - the `onChange` handler function
-  - [ ] Validate the `email` field. If the user has entered text into the `email` field and it doesn't contain an `@` symbol, then an error message should be displayed in an element with the class name of `error` indicating that the entry is not a valid email.
+- [x] Build the **`LoginForm`** component to:
+  - [x] Render JSX that is wrapped by an element with the class name of `login-form`
+  - [x] Render an input element for the following fields:
+    - [x] `email`
+    - [x] `password`
+  - [x] Each `input` element in the form should have a class name of `form-input` and should have the following props set:
+    - [x] `name` - the `name` of the `input` field being rendered (`email`, `password`)
+    - [x] `type` - the type of the `input` element (`text`, `email`, `number`, etc.)
+    - [x] `value` - the current value of the `input` element
+    - [x] `onChange` - the `onChange` handler function
+  - [x] Validate the `email` field. If the user has entered text into the `email` field and it doesn't contain an `@` symbol, then an error message should be displayed in an element with the class name of `error` indicating that the entry is not a valid email.
   - [ ] Gracefully handle errors:
     - [ ] If the user has attempted to login and gotten a `401` error, then an error message should be displayed in an element with the class name of `error` indicating that the `email` and `password` combination is incorrect.
     - [ ] If the user has attempted to login and gotten a `400` or `422` error, then an error message should be displayed in an element with the class name of `error` indicating what went wrong.
@@ -160,53 +160,53 @@ Update the `App` component to manage authentication state:
 
 #### Implement the `LoginPage` Component
 
-- [ ] Build the **`LoginPage`** component to:
-  - [ ] Render JSX that is wrapped by an element with the class name of `login-page`
-  - [ ] Using either a custom hook, context, or manually set state, check to see if a user is already logged in
-    - [ ] If the user is already logged in, redirect them to the `/activity` page.
-    - [ ] If no user is authenticated, render the `LoginForm` component and pass it any props it needs.
+- [x] Build the **`LoginPage`** component to:
+  - [x] Render JSX that is wrapped by an element with the class name of `login-page`
+  - [x] Using either a custom hook, context, or manually set state, check to see if a user is already logged in
+    - [x] If the user is already logged in, redirect them to the `/activity` page.
+    - [x] If no user is authenticated, render the `LoginForm` component and pass it any props it needs.
 
 #### Implement the `RegistrationForm` Component
 
-- [ ] Build the **`RegistrationForm`** component to:
-  - [ ] Render JSX that is wrapped by an element with the class name of `registration-form`
-  - [ ] Should render an input element for the following fields:
-    - [ ] `email`
-    - [ ] `username`
-    - [ ] `firstName`
-    - [ ] `lastName`
-    - [ ] `password`
-    - [ ] `passwordConfirm`
-  - [ ] Each `input` element in the form should have a class name of `form-input` and should have the following props set:
-    - [ ] `name` - the `name` of the `input` field being rendered (`email`, `username`, `firstName`, `lastName`, `password`, `passwordConfirm`)
-    - [ ] `type` - the type of the `input` element (`text`, `email`, `number`, etc.)
-    - [ ] `value` - the current value of the `input` element
-    - [ ] `onChange` - the `onChange` handler function
-  - [ ] Validate the `email` field: If the user has entered text into the `email` field and it doesn't contain an `@` symbol, then an error message should be displayed in an element with the class name of `error` indicating that the entry is not a valid email.
-  - [ ] Validate the `password` and `passwordConfirm` fields: If the user has entered text into the `password` and `passwordConfirm` fields and they don't match, then a message should be displayed in an element with the `className` of `error` with a message that contains the text: `passwords don't match`
-  - [ ] Gracefully handle errors:
-    - [ ] If the user has attempted to login and gotten a `401` error, then the `errors` object should contain a `form` property that contains a message indicating that the `email` and `password` combination is incorrect.
-    - [ ] If the user has attempted to login and gotten a `400` or `422` error, then the `errors` object should contain a `form` property that contains a message indicating what went wrong.
-  - [ ] There should be a `button` element with the `className` of `submit-registration`:
-    - [ ] It should contain the text `"Create Account"`
-    - [ ] When clicked, it should call the `signupUser` function
+- [x] Build the **`RegistrationForm`** component to:
+  - [x] Render JSX that is wrapped by an element with the class name of `registration-form`
+  - [x] Should render an input element for the following fields:
+    - [x] `email`
+    - [x] `username`
+    - [x] `firstName`
+    - [x] `lastName`
+    - [x] `password`
+    - [x] `passwordConfirm`
+  - [x] Each `input` element in the form should have a class name of `form-input` and should have the following props set:
+    - [x] `name` - the `name` of the `input` field being rendered (`email`, `username`, `firstName`, `lastName`, `password`, `passwordConfirm`)
+    - [x] `type` - the type of the `input` element (`text`, `email`, `number`, etc.)
+    - [x] `value` - the current value of the `input` element
+    - [x] `onChange` - the `onChange` handler function
+  - [x] Validate the `email` field: If the user has entered text into the `email` field and it doesn't contain an `@` symbol, then an error message should be displayed in an element with the class name of `error` indicating that the entry is not a valid email.
+  - [x] Validate the `password` and `passwordConfirm` fields: If the user has entered text into the `password` and `passwordConfirm` fields and they don't match, then a message should be displayed in an element with the `className` of `error` with a message that contains the text: `passwords don't match`
+  - [x] Gracefully handle errors:
+    - [x] If the user has attempted to login and gotten a `401` error, then the `errors` object should contain a `form` property that contains a message indicating that the `email` and `password` combination is incorrect.
+    - [x] If the user has attempted to login and gotten a `400` or `422` error, then the `errors` object should contain a `form` property that contains a message indicating what went wrong.
+  - [x] There should be a `button` element with the `className` of `submit-registration`:
+    - [x] It should contain the text `"Create Account"`
+    - [x] When clicked, it should call the `signupUser` function
 
 #### Implement the `RegistrationPage` component
 
-- [ ] Build the **`RegistrationPage`** component to:
-  - [ ] Render JSX that is wrapped by an element with the class name of `registration-page`
-  - [ ] Using either a custom hook, context, or manually handled state, check to see if a user is already logged in
-    - [ ] If the user is already logged in, it should redirect them to the `/activity` page
-    - [ ] If no user is authenticated, it should render the `RegistrationForm` component and pass it any props it needs
+- [x] Build the **`RegistrationPage`** component to:
+  - [x] Render JSX that is wrapped by an element with the class name of `registration-page`
+  - [x] Using either a custom hook, context, or manually handled state, check to see if a user is already logged in
+    - [x] If the user is already logged in, it should redirect them to the `/activity` page
+    - [x] If no user is authenticated, it should render the `RegistrationForm` component and pass it any props it needs
 
 #### Implement the `LandingPage` Component
 
-- [ ] Build the **`LandingPage`** component to:
-  - [ ] Render JSX that is wrapped by an element with the class name of `landing-page`
-  - [ ] Render an element with the class name of `hero`
-    - [ ] Inside it, display a large hero image using an `img` element with the class name of `hero-img`
-    - [ ] Render a brief blurb on what this application is about inside an element with the class name of `cta`
-  - [ ] Allow unauthenticated access
+- [x] Build the **`LandingPage`** component to:
+  - [x] Render JSX that is wrapped by an element with the class name of `landing-page`
+  - [x] Render an element with the class name of `hero`
+    - [x] Inside it, display a large hero image using an `img` element with the class name of `hero-img`
+    - [x] Render a brief blurb on what this application is about inside an element with the class name of `cta`
+  - [x] Allow unauthenticated access
 
 #### Implement the `ActivityPage` Component
 
@@ -358,7 +358,7 @@ Update the `App` component to manage authentication state:
 Here are the pieces of functionality that should be built out for the backend:
 
 - [ ] **Project setup**
-  - [ ] First things first, bootstrap the Express application with some essential files and starter code
+  - [x] First things first, bootstrap the Express application with some essential files and starter code
   - [x] Create a `.gitignore` file, an `app.js` file, an `app.test.js` file, and a `server.js` file
   - [x] Make sure `node_modules` are added to the `.gitignore` file.
   - [x] Add dependencies for `express@next`, `morgan`, `cors`, and `nodemon`
@@ -393,7 +393,7 @@ Here are the pieces of functionality that should be built out for the backend:
     - [x] Export each of the environment variables from the `config.js` file until the tests pass
     - [x] Write a `getDatabaseUri` function so that all the tests pass
   - [x] Commit all work to `git`
-  - [ ] The project should now be ready to go!
+  - [x] The project should now be ready to go!
 - [ ] **PostgreSQL database**
   - Time bring in a PostgreSQL database client as the application's persistence layer
   - Make sure the PostgreSQL server is running
@@ -425,13 +425,13 @@ Here are the pieces of functionality that should be built out for the backend:
         - [x] 3. It should then run the `lifetracker-schema.sql` file.
         - [x] Follow the exact same steps for `1`, `2`, and `3`, but with the `lifetracker_test` database.
   - [x] Setup the database by running `psql -f lifetracker.sql`
-  - [ ] Create a new file at the root of the project called `db.js`. In that file:
-    - [ ] Import the `getDatabaseUri` function from the `config.js` file.
-    - [ ] Initialize a new PostgreSQL client with the `pg` package and connect to PostgreSQL using any necessary config variables.
-    - [ ] Connect to PostgreSQL and log a message to the terminal on success or failure.
-    - [ ] Export the connected database client
-  - [ ] Commit all work to `git`
-  - [ ] A database client is now ready to be used!
+  - [x] Create a new file at the root of the project called `db.js`. In that file:
+    - [x] Import the `getDatabaseUri` function from the `config.js` file.
+    - [x] Initialize a new PostgreSQL client with the `pg` package and connect to PostgreSQL using any necessary config variables.
+    - [x] Connect to PostgreSQL and log a message to the terminal on success or failure.
+    - [x] Export the connected database client
+  - [x] Commit all work to `git`
+  - [x] A database client is now ready to be used!
 - [ ] **Server**
   - [x] Build out a bare-bones Express server with a health check route and an adequate middleware pipeline.
   - [x] Create a `utils` directory
@@ -487,7 +487,7 @@ Here are the pieces of functionality that should be built out for the backend:
         - [ ] User can successfully register with proper credentials
         - [x] Registering with duplicate email throws `BadRequestError`
         - [x] Registering with duplicate username throws `BadRequestError`
-        - [ x] Registering with invalid email throws `BadRequestError`
+        - [x] Registering with invalid email throws `BadRequestError`
       - [ ] Test the `fetchUserByEmail` method:. Write test cases for:
         - [ ] A valid email returns a user from the database
         - [ ] Invalid emails are handled correctly
