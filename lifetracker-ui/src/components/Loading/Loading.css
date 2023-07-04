@@ -1,0 +1,11 @@
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Take the full height of the viewport */
+  }
+  
+  .loading-message {
+    font-size: 2em; /* Make the text larger */
+  }
+  
