@@ -1,0 +1,19 @@
+.access-forbidden {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.access-forbidden h1 {
+    font-size: 3em;
+}
+
+.access-forbidden p {
+    font-size: 1.2em;
+}

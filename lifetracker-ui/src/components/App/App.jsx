@@ -7,12 +7,62 @@ import LoginForm from '../LoginForm/LoginForm';
 import RegistrationForm from '../RegistrationForm/RegistrationForm';
 import LoginPage from '../LoginPage/LoginPage';
 import RegistrationPage from '../RegistrationPage/RegistrationPage';
+import apiClient from "../../services/apiClient";
+import ActivityPage from '../ActivityPage/ActivityPage';
+import NutritionPage from '../NutritionPage/NutritionPage';
+import AccessForbidden from '../AccessForbidden/AccessForbidden';
+import NotFound from '../NotFound/NotFound';
+
 
 function App( {handleLogout}) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [loginError, setLoginError] = useState("");
   const [registrationError, setRegistrationError] = useState("");
   const [userName, setUserName] = useState()
+  const [appState, setAppState] = useState({
+    user: {},
+    isAuthenticated: false,
+    nutrition: [],
+    sleep: [],
+    exercise: [],
+  });
+
+
+
+const [nutritionRecords, setNutritionRecords] = useState([]);
+
+useEffect(() => {
+  const fetchNutrition = async () => {
+      const { data, error } = await apiClient.fetchAllNutrition();
+      if (data) setNutritionRecords(data.nutrition);
+      if (error) console.error(error);
+  };
+  fetchNutrition();
+}, []);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const token = localStorage.getItem("lifetracker_token");
+      if (token) {
+        apiClient.setToken(token);
+
+        const { data } = await apiClient.fetchUser();
+        if (data) {
+          setAppState(prevState => ({
+            ...prevState,
+            user: data.user,
+            token: token,
+            isAuthenticated: true,
+            nutrition: data.nutrition,
+            exercise: data.exercise,
+            sleep: data.sleep,
+          }));
+        }
+      }
+    };
+
+    fetchUser();
+  }, [appState.isAuthenticated]);
 
   useEffect(() => {
     const checkLoggedIn = () => {
@@ -50,6 +100,11 @@ function App( {handleLogout}) {
       if (response.status === 200) {
         // const { token } = response.data;
         const { token } = data;
+        const { user } = data;
+        setAppState(previousState => ({
+            ...previousState, user: user
+        }))
+        console.log("useeerrr", user)
         localStorage.setItem("token", token);
 
         //Successful Login
@@ -86,6 +141,10 @@ function App( {handleLogout}) {
       if (response.status === 201) {
         //get the token information and store in localStorage
         const { token } = data;
+        const { user } = data;
+        setAppState(previousState => ({
+            ...previousState, user: user
+        }))
         localStorage.setItem("token", token);
 
         const decodedToken = jwtDecode(token); //a way to get username from token
@@ -104,47 +163,51 @@ function App( {handleLogout}) {
   };
 
   return (
-    <Router>
-      <Navbar loggedIn={loggedIn}/>
+    <div className="app">
+      <Router>
+        <Navbar loggedIn={loggedIn} />
 
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route
-          path="/login"
-          element={
-            loggedIn ? (
-              <LoginPage 
-              loggedIn={loggedIn} 
-              onLogin={handleLogin} 
-              loginError={loginError} 
-            />
-            ) : (
-              <LoginForm onLogin={handleLogin} error={loginError} />
-            )
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            loggedIn ? (
-              <RegistrationPage 
-              loggedIn={loggedIn} 
-              onRegister={handleRegistration} 
-              loginError={loginError} 
-            />
-            ) : (
-              <RegistrationForm onRegister={handleRegistration} error={registrationError} />
-            )
-          }
-        />
-        {/* Define other routes and components here */}
-      </Routes>
-      
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route
+            path="/login"
+            element={
+              loggedIn ? (
+                <LoginPage loggedIn={loggedIn} onLogin={handleLogin} loginError={loginError} />
+              ) : (
+                <LoginForm onLogin={handleLogin} error={loginError} />
+              )
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              loggedIn ? (
+                <RegistrationPage loggedIn={loggedIn} onRegister={handleRegistration} registrationError={registrationError} />
+              ) : (
+                <RegistrationForm onRegister={handleRegistration} error={registrationError} />
+              )
+            }
+          />
+          <Route
+            path="/activity"
+            element={
+              loggedIn ? <ActivityPage /> : <AccessForbidden />
+            }
+          />
+          <Route
+            path="/nutrition/*"
+            element={
+              loggedIn ? <NutritionPage appState={appState} setAppState={setAppState} /> : <AccessForbidden />
+            }
+          />
 
-    </Router>
-  );
-}
+
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </Router>
+              </div>
+            );
+          }
 
 export default App;
-
-
