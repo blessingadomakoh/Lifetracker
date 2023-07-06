@@ -54,60 +54,60 @@ Implement any of the following features to improve the application:
 
 #### The `App` Component
 
-- [ ] Build the `App` component to:
-  - [ ] Be wrapped by an element with the class name of `app`
-  - [ ] Contain the routes for the app
-  - [ ] Render the `Navbar` component on every route
-  - [ ] Render a `BrowserRouter` component that contains a `Routes` component with the following routes:
-    - [ ] `/` - Render the `Landing` component
-    - [ ] `/login` - Render the `LoginPage` component
-    - [ ] `/register` - Render the `RegistrationPage` component
-    - [ ] `/activity` - Render the `ActivityPage` component **only** if the user is logged in, otherwise it renders the `AccessForbidden` component
-    - [ ] `/nutrition/*` - Render the `NutritionPage`component **only** if the user is logged in, otherwise it renders the`AccessForbidden` component
-    - [ ] `*` - Anything else renders the `NotFound` component
+- [x] Build the `App` component to:
+  - [x] Be wrapped by an element with the class name of `app`
+  - [x] Contain the routes for the app
+  - [x] Render the `Navbar` component on every route
+  - [x] Render a `BrowserRouter` component that contains a `Routes` component with the following routes:
+    - [x] `/` - Render the `Landing` component
+    - [x] `/login` - Render the `LoginPage` component
+    - [x] `/register` - Render the `RegistrationPage` component
+    - [x] `/activity` - Render the `ActivityPage` component **only** if the user is logged in, otherwise it renders the `AccessForbidden` component
+    - [x] `/nutrition/*` - Render the `NutritionPage`component **only** if the user is logged in, otherwise it renders the`AccessForbidden` component
+    - [x] `*` - Anything else renders the `NotFound` component
 
 #### Handling API Requests
 
-- [ ] Create a `constants.js` file at the root of the project that exports the following variables:
-  - [ ] `PRODUCTION_API_BASE_URL` - set to whatever URL the production API is deployed at
-  - [ ] `DEVELOPMENT_API_BASE_URL` - set to `"http://localhost:3001"` for development
-  - [ ] `API_BASE_URL` - If `process.env.NODE_ENV` is `production`, set this to `PRODUCTION_API_BASE_URL`, otherwise set it to `DEVELOPMENT_API_BASE_URL`
-- [ ] Create a `services` directory at the root of the project.
-- [ ] Inside the `services` directory, create an `apiClient.js` file
-- [ ] In the `apiClient.js` file, import the `axios` package and the `API_BASE_URL` constant from the `constants.js` file.
-- [ ] Define a new class in that file called `ApiClient`.
-  - [ ] Give it a constructor function that accepts a single parameter - `remoteHostUrl`. The constructor should attach the `remoteHostUrl` parameter to a new instance with `this.remoteHostUrl = remoteHostUrl`. It should also set `this.token = null`.
-  - [ ] Export default a new instance of the `ApiClient` class.
-  - [ ] Add an additional method called `setToken` that accepts a single parameter - `token` and attaches it to the instance.
-  - [ ] Create a utility method called `request` that uses `axios` to issue HTTP requests
-  - [ ] Add a `login` method that uses the `request` method to send an HTTP request to the `auth/login` endpoint
-  - [ ] Add a `signup` method that uses the `request` method to send an HTTP request to the `auth/register` endpoint
-  - [ ] Add a `fetchUserFromToken` method that uses the `request` method to send an HTTP request to the `auth/me` endpoint
+- [x] Create a `constants.js` file at the root of the project that exports the following variables:
+  - [x] `PRODUCTION_API_BASE_URL` - set to whatever URL the production API is deployed at
+  - [x] `DEVELOPMENT_API_BASE_URL` - set to `"http://localhost:3001"` for development
+  - [x] `API_BASE_URL` - If `process.env.NODE_ENV` is `production`, set this to `PRODUCTION_API_BASE_URL`, otherwise set it to `DEVELOPMENT_API_BASE_URL`
+- [x] Create a `services` directory at the root of the project.
+- [x] Inside the `services` directory, create an `apiClient.js` file
+- [x] In the `apiClient.js` file, import the `axios` package and the `API_BASE_URL` constant from the `constants.js` file.
+- [x] Define a new class in that file called `ApiClient`.
+  - [x] Give it a constructor function that accepts a single parameter - `remoteHostUrl`. The constructor should attach the `remoteHostUrl` parameter to a new instance with `this.remoteHostUrl = remoteHostUrl`. It should also set `this.token = null`.
+  - [x] Export default a new instance of the `ApiClient` class.
+  - [x] Add an additional method called `setToken` that accepts a single parameter - `token` and attaches it to the instance.
+  - [x] Create a utility method called `request` that uses `axios` to issue HTTP requests
+  - [x] Add a `login` method that uses the `request` method to send an HTTP request to the `auth/login` endpoint
+  - [x] Add a `signup` method that uses the `request` method to send an HTTP request to the `auth/register` endpoint
+  - [x] Add a `fetchUserFromToken` method that uses the `request` method to send an HTTP request to the `auth/me` endpoint
   - [ ] **Add as many other methods as needed when making API requests.**
 
 #### Manage Authentication State
 
 Update the `App` component to manage authentication state:
 
-- [ ] Create a state variable called `appState` with a function called `setAppState` to update that state.
-  - [ ] Initialize `appState` with an object containing properties like `user`, `isAuthenticated`, `nutrition`, `sleep`, and `exercise`.
-- [ ] Implement a `useEffect` hook to fetch the user data.
-  - [ ] Define an asynchronous function named `fetchUser` to fetch the user data.
-    - [ ] Inside the `fetchUser` function, retrieve a token from `localStorage` using `localStorage.getItem("lifetracker_token")`
-    - [ ] Call the `setToken` function from the `apiClient.js` file.
-    - [ ] Make an API call to fetch user data using the `fetchUser` function from the `apiClient.js` file and extract the `data` from the response.
-    - [ ] If `data` is not null and not undefined, update the component's state using the `setAppState` function. Pass a callback to `setAppState` that takes the previous state and returns a new state object.
-    - [ ] In the callback, use the spread operator (`...`) to copy the previous state's properties to the new state object.
-    - [ ] Assign the following properties from the `data` object to the new state object:
-      - [ ] `user`
-      - [ ] `token`
-    - [ ] Assign at least **one** of the following properties from the `data` object to the new state object:
-      - [ ] `nutrition`
-      - [ ] `exercise`
-      - [ ] `sleep`
-    - [ ] Call the `setAppState` with a new state object to update the component's state.
-    - [ ] Outside the `fetchUser` function, call `fetchUser` to trigger the initial data fetch when the component mounts.
-    - [ ] The effect should be triggered whenever the value of `appState.isAuthenticated` changes.
+- [x] Create a state variable called `appState` with a function called `setAppState` to update that state.
+  - [x] Initialize `appState` with an object containing properties like `user`, `isAuthenticated`, `nutrition`, `sleep`, and `exercise`.
+- [x] Implement a `useEffect` hook to fetch the user data.
+  - [x] Define an asynchronous function named `fetchUser` to fetch the user data.
+    - [x] Inside the `fetchUser` function, retrieve a token from `localStorage` using `localStorage.getItem("lifetracker_token")`
+    - [x] Call the `setToken` function from the `apiClient.js` file.
+    - [x] Make an API call to fetch user data using the `fetchUser` function from the `apiClient.js` file and extract the `data` from the response.
+    - [x] If `data` is not null and not undefined, update the component's state using the `setAppState` function. Pass a callback to `setAppState` that takes the previous state and returns a new state object.
+    - [x] In the callback, use the spread operator (`...`) to copy the previous state's properties to the new state object.
+    - [x] Assign the following properties from the `data` object to the new state object:
+      - [x] `user`
+      - [x] `token`
+    - [x] Assign at least **one** of the following properties from the `data` object to the new state object:
+      - [x] `nutrition`
+      - [x] `exercise`
+      - [x] `sleep`
+    - [x] Call the `setAppState` with a new state object to update the component's state.
+    - [x] Outside the `fetchUser` function, call `fetchUser` to trigger the initial data fetch when the component mounts.
+    - [x] The effect should be triggered whenever the value of `appState.isAuthenticated` changes.
 
 #### Implement the `Loading` Component
 
@@ -251,94 +251,94 @@ Update the `App` component to manage authentication state:
 
 #### Implement the `NutritionPage` Component
 
-- [ ] Build the **`NutritionPage`** component to:
-  - [ ] Render JSX that is wrapped by an element with the class name of `nutrition-page`
-  - [ ] Take the `appState` and `setAppState` as props and extract all the necessary data from it.
-  - [ ] Render a nested `Routes` component from `react-router-dom`.
-    - [ ] There should be multiple `Route` components:
-      - [ ] The `/nutrition` route should render the `NutritionOverview` component
-      - [ ] The `/nutrition/create` route should render the `NutritionNew` component
-      - [ ] The `/nutrition/id/:nutritionId` should render the `NutritionDetail` component
-      - [ ] Any other route should render the `NotFound` component
+- [x] Build the **`NutritionPage`** component to:
+  - [x] Render JSX that is wrapped by an element with the class name of `nutrition-page`
+  - [x] Take the `appState` and `setAppState` as props and extract all the necessary data from it.
+  - [x] Render a nested `Routes` component from `react-router-dom`.
+    - [x] There should be multiple `Route` components:
+      - [x] The `/nutrition` route should render the `NutritionOverview` component
+      - [x] The `/nutrition/create` route should render the `NutritionNew` component
+      - [x] The `/nutrition/id/:nutritionId` should render the `NutritionDetail` component
+      - [x] Any other route should render the `NotFound` component
 
 #### Implement the `NutritionOverview` Component
 
-- [ ] Build the **`NutritionOverview`** component to:
-  - [ ] Render JSX that is wrapped by an element with the class name of `nutrition-overview`
-  - [ ] Take the `appState` and `setAppState` as props and extract all the necessary data from it.
-    - [ ] If the `error` state variable has a valid string in it, it should render the `error` message inside an element with the class name of `error`
-    - [ ] If `isLoading` is `true`, it should render the `Loading` component
-    - [ ] If `isLoading` is `false`, it should render the `NutritionFeed` component and pass it the appropriate props
-  - [ ] Near the top of the component, it should render a `Link` component that directs to the `/nutrition/create` route and contains the text: `"Record Nutrition"`
+- [x] Build the **`NutritionOverview`** component to:
+  - [x] Render JSX that is wrapped by an element with the class name of `nutrition-overview`
+  - [x] Take the `appState` and `setAppState` as props and extract all the necessary data from it.
+    - [x] If the `error` state variable has a valid string in it, it should render the `error` message inside an element with the class name of `error`
+    - [x] If `isLoading` is `true`, it should render the `Loading` component
+    - [x] If `isLoading` is `false`, it should render the `NutritionFeed` component and pass it the appropriate props
+  - [x] Near the top of the component, it should render a `Link` component that directs to the `/nutrition/create` route and contains the text: `"Record Nutrition"`
 
 #### Implement the `NutritionFeed` Component
 
-- [ ] Build the **`NutritionFeed`** component to:
-  - [ ] Render JSX that is wrapped by an element with the class name of `nutrition-feed`
-  - [ ] Receive **at least** the following props:
-    - [ ] `nutritions` - an array of `nutrition` items
-  - [ ] If the `nutritions` array has no items in it, render an empty message that says `Nothing here yet` inside an element with the class name of `empty-message`
-  - [ ] If the `nutritions` array does have items in it:
-    - [ ] For each item in the `nutritions` array, it should render a `NutritionCard` component
+- [x] Build the **`NutritionFeed`** component to:
+  - [x] Render JSX that is wrapped by an element with the class name of `nutrition-feed`
+  - [x] Receive **at least** the following props:
+    - [x] `nutritions` - an array of `nutrition` items
+  - [x] If the `nutritions` array has no items in it, render an empty message that says `Nothing here yet` inside an element with the class name of `empty-message`
+  - [x] If the `nutritions` array does have items in it:
+    - [x] For each item in the `nutritions` array, it should render a `NutritionCard` component
 
 #### Implement the `NutritionNew` Component
 
-- [ ] Build the **`NutritionNew`** component to:
-  - [ ] Render JSX that is wrapped by an element with the class name of `nutrition-new`
-  - [ ] Render the `NutritionForm` component and pass it the appropriate props
+- [x] Build the **`NutritionNew`** component to:
+  - [x] Render JSX that is wrapped by an element with the class name of `nutrition-new`
+  - [x] Render the `NutritionForm` component and pass it the appropriate props
 
 #### Implement the `NutritionForm` Component
 
-- [ ] Build the **`NutritionForm`** component to:
-  - [ ] Render JSX that is wrapped by an element with the class name of `nutrition-form`
-  - [ ] Render an input element for the following fields:
-    - [ ] `name` - name of the nutrition item (defaults to an empty string)
-    - [ ] `calories` - number of calories in the nutrition item (defaults to 1)
-    - [ ] `imageUrl` - the `url` of an image to show for this nutrition item (defaults to an empty string)
-    - [ ] `category` - the category that this nutrition item belongs to, like fruit, meat, soda, snack, nuts, etc. (defaults to an empty string)
-  - [ ] Each `input` element in the form should have a class name of `form-input` and should have the following props set:
-    - [ ] `name` - the `name` of the `input` field being rendered (`name`, `calories`, `imageUrl`, `category`)
-    - [ ] `type` - the type of the `input` element (`text`, `email`, `number`, etc.)
-    - [ ] `value` - the current value of the `input` element
-    - [ ] `onChange` - the `onChange` handler function
-  - [ ] Gracefully handle errors:
-    - [ ] If any of the required fields are left blank, there should be an error message inside of an element with the class name of `error` indicating which fields are required.
-    - [ ] If the user has attempted to create a nutrition entry and gotten a `400` or `422` error, then that message should be displayed inside an element with the class name of `error`
-  - [ ] There should be a `button` element with the class name of `submit-nutrition`:
-    - [ ] Contain the text `"Save"`
-    - [ ] When clicked, it should call a function that creates a new nutrition entry
-  - [ ] After the form has been successfully submitted:
-    - [ ] Ensure that the new nutrition entry is stored in the `nutrition` context's `nutritions` array and is displayed in the `NutritionFeed` component
+- [x] Build the **`NutritionForm`** component to:
+  - [x] Render JSX that is wrapped by an element with the class name of `nutrition-form`
+  - [x] Render an input element for the following fields:
+    - [x] `name` - name of the nutrition item (defaults to an empty string)
+    - [x] `calories` - number of calories in the nutrition item (defaults to 1)
+    - [x] `imageUrl` - the `url` of an image to show for this nutrition item (defaults to an empty string)
+    - [x] `category` - the category that this nutrition item belongs to, like fruit, meat, soda, snack, nuts, etc. (defaults to an empty string)
+  - [x] Each `input` element in the form should have a class name of `form-input` and should have the following props set:
+    - [x] `name` - the `name` of the `input` field being rendered (`name`, `calories`, `imageUrl`, `category`)
+    - [x] `type` - the type of the `input` element (`text`, `email`, `number`, etc.)
+    - [x] `value` - the current value of the `input` element
+    - [x] `onChange` - the `onChange` handler function
+  - [x] Gracefully handle errors:
+    - [x] If any of the required fields are left blank, there should be an error message inside of an element with the class name of `error` indicating which fields are required.
+    - [x] If the user has attempted to create a nutrition entry and gotten a `400` or `422` error, then that message should be displayed inside an element with the class name of `error`
+  - [x] There should be a `button` element with the class name of `submit-nutrition`:
+    - [x] Contain the text `"Save"`
+    - [x] When clicked, it should call a function that creates a new nutrition entry
+  - [x] After the form has been successfully submitted:
+    - [x] Ensure that the new nutrition entry is stored in the `nutrition` context's `nutritions` array and is displayed in the `NutritionFeed` component
     - [ ] Fetch the `activity` data again so that new summary stats will be calculated
 
 #### Implement the `NutritionDetail` Component
 
-- [ ] Build the **`NutritionDetail.jsx`** component to:
-  - [ ] Render JSX that is wrapped by an element with the class name of `nutrition-detail`
-  - [ ] Leverage the `useParams` hook from `react-router-dom` to extract the `nutritionId` param from the URL
-  - [ ] When the component is mounted to the screen...
-    - [ ] It should make a `GET` request to the `/nutrition/:nutritionId` endpoint with the `axios.get` method.
-    - [ ] The `:nutritionId` part of the request should be replaced with the `nutritionId` pulled from the URL.
-    - [ ] When the initial request is loading, it should render an `h1` element with the class name of `loading` and contain the text `"Loading..."`
-    - [ ] Store the `nutrition` received by the request in state and then render a `NutritionCard` component for that nutrition.
-    - [ ] If no `nutrition` is found with that `id`, it should render the `NotFound` component
+- [x] Build the **`NutritionDetail.jsx`** component to:
+  - [x] Render JSX that is wrapped by an element with the class name of `nutrition-detail`
+  - [x] Leverage the `useParams` hook from `react-router-dom` to extract the `nutritionId` param from the URL
+  - [x] When the component is mounted to the screen...
+    - [x] It should make a `GET` request to the `/nutrition/:nutritionId` endpoint with the `axios.get` method.
+    - [x] The `:nutritionId` part of the request should be replaced with the `nutritionId` pulled from the URL.
+    - [x] When the initial request is loading, it should render an `h1` element with the class name of `loading` and contain the text `"Loading..."`
+    - [x] Store the `nutrition` received by the request in state and then render a `NutritionCard` component for that nutrition.
+    - [x] If no `nutrition` is found with that `id`, it should render the `NotFound` component
 
 #### Implement the `NutritionCard` Component
 
-- [ ] Build the **`NutritionCard`** component to:
-  - [ ] Render JSX that is wrapped by an element with the class name of `nutrition-card`
-  - [ ] Accept **at least** the following props:
-    - [ ] `nutrition` - should be a nutrition entry object containing the following attributes:
-      - [ ] `imageUrl` - (not required)
-      - [ ] `name` - (required)
-      - [ ] `calories` - (required)
-      - [ ] `category` - (required)
-      - [ ] `createdAt` - (required)
-  - [ ] Render the `name` of the `nutrition` entry inside an element with the class name of `nutrition-name`
-  - [ ] If the `nutrition` entry has a valid `imageUrl` attribute, render an `img` element with the class name of `nutrition-image` and use that `imageUrl` as its `src`
-  - [ ] Render the `calories` attribute of the `nutrition` entry inside an element with the class name of `nutrition-calories`
-  - [ ] Render the `category` attribute of the `nutrition` entry inside an element with the class name of `nutrition-category`
-  - [ ] Render the `createdAt` attribute of the `nutrition` entry in the format `dd/mm/yyyy` - example: `07/02/2022` - inside an element with the class name of `nutrition-date`.
+- [x] Build the **`NutritionCard`** component to:
+  - [x] Render JSX that is wrapped by an element with the class name of `nutrition-card`
+  - [x] Accept **at least** the following props:
+    - [x] `nutrition` - should be a nutrition entry object containing the following attributes:
+      - [x] `imageUrl` - (not required)
+      - [x] `name` - (required)
+      - [x] `calories` - (required)
+      - [x] `category` - (required)
+      - [x] `createdAt` - (required)
+  - [x] Render the `name` of the `nutrition` entry inside an element with the class name of `nutrition-name`
+  - [x] If the `nutrition` entry has a valid `imageUrl` attribute, render an `img` element with the class name of `nutrition-image` and use that `imageUrl` as its `src`
+  - [x] Render the `calories` attribute of the `nutrition` entry inside an element with the class name of `nutrition-calories`
+  - [x] Render the `category` attribute of the `nutrition` entry inside an element with the class name of `nutrition-category`
+  - [x] Render the `createdAt` attribute of the `nutrition` entry in the format `dd/mm/yyyy` - example: `07/02/2022` - inside an element with the class name of `nutrition-date`.
 
   - [ ] **DO THE SAME FOR ANY OTHER RESOURCE THAT IS IN THE APPLICATION**
     - [ ] Choose whatever resources you want!
