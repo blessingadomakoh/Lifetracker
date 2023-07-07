@@ -4,6 +4,7 @@ import NutritionOverview from '../NutritionOverview/NutritionOverview';
 import NutritionNew from '../NutritionNew/NutritionNew';
 import NutritionDetail from '../NutritionDetail/NutritionDetail';
 import NotFound from '../NotFound/NotFound';
+import "./NutritionPage.css"
 
 const NutritionPage = ({ appState, setAppState }) => {
   const navigate = useNavigate();

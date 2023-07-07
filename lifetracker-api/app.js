@@ -7,6 +7,7 @@ const { NotFoundError } = require("./utils/errors")
 const config = require("./config")
 const authRoutes = require("./routes/authRoutes")
 const nutritionRoutes = require("./routes/nutritionRoutes");
+const activityRoutes = require("./routes/activityRoutes")
 
 const app = express()
 
@@ -18,8 +19,9 @@ app.use(express.json())
 app.use(morgan("dev"))
 
 // routes
-app.use("/auth", authRoutes)
+app.use("/auth", authRoutes);
 app.use("/api/nutrition", nutritionRoutes);
+app.use("/api/activity", activityRoutes);
 
 // health check
 app.get("/", function (req, res) {

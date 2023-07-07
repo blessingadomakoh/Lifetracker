@@ -25,9 +25,41 @@ function App( {handleLogout}) {
     nutrition: [],
     sleep: [],
     exercise: [],
+    activityData: {}
   });
 
-
+  useEffect(() => {
+    const fetchUser = async () => {
+      const token = localStorage.getItem("lifetracker_token");
+      if (token) {
+        apiClient.setToken(token);
+  
+        const { data } = await apiClient.fetchUser();
+        if (data) {
+          const activityRes = await apiClient.fetchActivityData(data.user.id);
+          if(activityRes.data) {
+            setAppState(prevState => ({
+              ...prevState,
+              user: data.user,
+              token: token,
+              isAuthenticated: true,
+              nutrition: data.nutrition,
+              exercise: data.exercise,
+              sleep: data.sleep,
+              activityData: {
+                totalCaloriesPerDay: activityRes.data.totalCaloriesPerDay,
+                avgCaloriesPerCategory: activityRes.data.avgCaloriesPerCategory
+              }
+            }));
+          }
+        }
+      }
+    };
+  
+    fetchUser();
+  }, [appState.isAuthenticated]);
+  
+  
 
 const [nutritionRecords, setNutritionRecords] = useState([]);
 
@@ -40,29 +72,27 @@ useEffect(() => {
   fetchNutrition();
 }, []);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const token = localStorage.getItem("lifetracker_token");
-      if (token) {
-        apiClient.setToken(token);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     const token = localStorage.getItem("lifetracker_token");
+  //     if (token) {
+  //       apiClient.setToken(token);
 
-        const { data } = await apiClient.fetchUser();
-        if (data) {
-          setAppState(prevState => ({
-            ...prevState,
-            user: data.user,
-            token: token,
-            isAuthenticated: true,
-            nutrition: data.nutrition,
-            exercise: data.exercise,
-            sleep: data.sleep,
-          }));
-        }
-      }
-    };
+  //       const { data } = await apiClient.fetchUser();
+  //       if (data) {
+  //         setAppState(prevState => ({
+  //           ...prevState,
+  //           user: data.user,
+  //           token: token,
+  //           isAuthenticated: true,
+  //           nutrition: data.nutrition,
+  //         }));
+  //       }
+  //     }
+  //   };
 
-    fetchUser();
-  }, [appState.isAuthenticated]);
+  //   fetchUser();
+  // }, [appState.isAuthenticated]);
 
   useEffect(() => {
     const checkLoggedIn = () => {
@@ -154,7 +184,7 @@ useEffect(() => {
         setLoggedIn(true);
         console.log(data.message); //optional - display a success message
       } else {
-        //REgistration failed
+        //Registration failed
         console.log(data.message); //optional - display error meesage
       }
     } catch (error) {
@@ -189,12 +219,15 @@ useEffect(() => {
               )
             }
           />
-          <Route
-            path="/activity"
-            element={
-              loggedIn ? <ActivityPage /> : <AccessForbidden />
-            }
-          />
+         <Route
+  path="/activity"
+  element={
+    loggedIn ? 
+      <ActivityPage activityData={appState.activityData} setAppState={setAppState} /> 
+      : <AccessForbidden />
+  }
+/>
+
           <Route
             path="/nutrition/*"
             element={

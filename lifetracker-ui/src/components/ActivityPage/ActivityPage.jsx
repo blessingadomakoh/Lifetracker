@@ -2,18 +2,28 @@ import React from 'react';
 import Loading from '../Loading/Loading';
 import ActivityFeed from '../ActivityFeed/ActivityFeed';
 
-const ActivityPage = ({ appState, setAppState }) => {
-  const { isProcessing, activityData } = appState;
+const ActivityPage = ({ activityData = {}, setAppState }) => {
+  const { 
+    isProcessing = false, 
+    totalCaloriesPerDay = [], 
+    avgCaloriesPerCategory = [] 
+  } = activityData;
 
   return (
     <div className="activity-page">
       {isProcessing ? (
         <Loading />
       ) : (
-        <ActivityFeed activityData={activityData} setAppState={setAppState} />
+        <ActivityFeed
+      totalCaloriesPerDay={totalCaloriesPerDay}
+      avgCaloriesPerCategory={avgCaloriesPerCategory}
+      setAppState={setAppState}
+    />
+
       )}
     </div>
   );
 };
+
 
 export default ActivityPage;

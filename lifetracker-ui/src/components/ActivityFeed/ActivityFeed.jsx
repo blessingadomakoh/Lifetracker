@@ -11,7 +11,7 @@ const ActivityFeed = ({ totalCaloriesPerDay, avgCaloriesPerCategory }) => {
     <div className="activity-feed">
       <div className="per-category">
         <h4>Average Calories Per Category</h4>
-        {avgCaloriesPerCategory.slice(0, 6).map((item, index) => (
+        {avgCaloriesPerCategory && avgCaloriesPerCategory.slice(0, 6).map((item, index) => (
           <SummaryStat
             key={index}
             stat={Math.floor(item.calories * 10) / 10}
@@ -22,7 +22,7 @@ const ActivityFeed = ({ totalCaloriesPerDay, avgCaloriesPerCategory }) => {
       </div>
       <div className="per-day">
         <h4>Total Calories Per Day</h4>
-        {totalCaloriesPerDay.map((item, index) => (
+        {totalCaloriesPerDay && totalCaloriesPerDay.map((item, index) => (
           <SummaryStat
             key={index}
             stat={Math.floor(item.calories)}
@@ -36,3 +36,4 @@ const ActivityFeed = ({ totalCaloriesPerDay, avgCaloriesPerCategory }) => {
 };
 
 export default ActivityFeed;
+

@@ -655,7 +655,7 @@ Here are the pieces of functionality that should be built out for the backend:
 - **Summary Statistics**
   - [ ] One of the last features of the API will be a model that calculates summary statistic on the different resources that users are tracking. This includes statistics like average calories per day, or max calories per category. To do that, we'll create a new `Activity` model and an `activity` route that will be used to populate the frontend.
   - [ ] The **Activity** model
-    - [ ] In the `models` directory, create two new files: `models/Activity.js` and `models/Activity.test.js`
+    - [x] In the `models` directory, create two new files: `models/Activity.js` and `models/Activity.test.js`
       - [ ] The `Activity` model should have **at least** the following static methods:
         - [ ] `calculateDailyCaloriesSummaryStats`
           - [ ] Should execute a SQL query that calculates **at least** the total calories consumed per day (aliased as `totalCaloriesPerDay`), along with the day (aliased as `date`).

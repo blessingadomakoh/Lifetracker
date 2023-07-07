@@ -46,7 +46,7 @@ class ApiClient {
   async fetchAllNutrition(userId) {
     const endpoint = `api/nutrition`;
     const response = await this.request({ endpoint, method: "GET", data: { user_id: userId } });
-    return response.data;
+    return response;
   }
   
   
@@ -81,6 +81,17 @@ class ApiClient {
     });
     return response.data;
   }
+
+  async fetchActivityData(userId) {
+    return fetch(`api/activity/${userId}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}` // if you're using token-based authentication
+      },
+    }).then(res => res.json());
+  }
+  
+  
   
   
 }

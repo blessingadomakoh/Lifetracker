@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./NutritionForm.css"
 
 const NutritionForm = ({ onSubmit, appState }) => {
   const [name, setName] = useState("");
@@ -21,7 +22,7 @@ const NutritionForm = ({ onSubmit, appState }) => {
       calories: calories,
       image_url: imageUrl,
       category: category,
-      user_id: appState.user.id // replace this with the actual user_id when you have authentication set up
+      user_id: appState.user.id 
     })
       .then(() => {
         setName("");

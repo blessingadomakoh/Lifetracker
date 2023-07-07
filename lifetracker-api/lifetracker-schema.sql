@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS activity (
     category VARCHAR(255) NOT NULL,
     calories INTEGER NOT NULL,
     image_url VARCHAR(255) NOT NULL,
-    user_id INTEGER NOT NULL REFERENCES users(id),
+    user_id INTEGER NOT NULL, FOREIGN KEY (user_id) REFERENCES users(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
