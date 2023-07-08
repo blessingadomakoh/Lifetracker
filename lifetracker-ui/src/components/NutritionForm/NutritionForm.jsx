@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import CaloriesContext from '../CaloriesContext';
 import "./NutritionForm.css"
 
 const NutritionForm = ({ onSubmit, appState }) => {
@@ -9,6 +10,11 @@ const NutritionForm = ({ onSubmit, appState }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [category, setCategory] = useState("");
   const [error, setError] = useState("");
+
+
+  //may delete
+  const { setMealCalories } = useContext(CaloriesContext); // consume the CaloriesContext
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,10 +31,10 @@ const NutritionForm = ({ onSubmit, appState }) => {
       category: category,
       user_id: appState.user.id 
     })
-    .then(
-      navigate("/nutrition")
-    )
-    
+    .then(() => {
+      setMealCalories(450, 450); // update the calories when the form is submitted
+      navigate("/nutrition");
+    })
       .catch((error) => {
         setError(error.message);
       });

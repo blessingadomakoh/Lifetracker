@@ -12,9 +12,11 @@ import ActivityPage from '../ActivityPage/ActivityPage';
 import NutritionPage from '../NutritionPage/NutritionPage';
 import AccessForbidden from '../AccessForbidden/AccessForbidden';
 import NotFound from '../NotFound/NotFound';
+import CaloriesContext from '../CaloriesContext'; //#may delete
 
 
 function App( {handleLogout}) {
+
   // const [loggedIn, setLoggedIn] = useState(false);
   const [loginError, setLoginError] = useState("");
   const [registrationError, setRegistrationError] = useState("");
@@ -28,6 +30,22 @@ function App( {handleLogout}) {
     exercise: [],
     activityData: {}
   });
+
+
+
+  // may delete
+  const [averageDailyCalories, setAverageDailyCalories] = useState(0); // new state
+  const [maxCaloriesOneMeal, setMaxCaloriesOneMeal] = useState(0); // new state
+
+  const setMealCalories = (avg, max) => { // new function to update calories
+    setAverageDailyCalories(avg);
+    setMaxCaloriesOneMeal(max);
+  };
+
+
+
+
+
   useEffect(() => {
     const fetchUser = async () => {
       const token = localStorage.getItem("lifetracker_token");
@@ -169,6 +187,8 @@ function App( {handleLogout}) {
   };
 
   return (
+    // may delete
+  <CaloriesContext.Provider value={{ averageDailyCalories, maxCaloriesOneMeal, setMealCalories }}> {/* Provide the CaloriesContext */}
     <div className="app">
       <Router>
         <Navbar loggedIn={appState.isAuthenticated} />
@@ -216,6 +236,8 @@ function App( {handleLogout}) {
                   </Routes>
                 </Router>
               </div>
+   </CaloriesContext.Provider>
+
             );
           }
 

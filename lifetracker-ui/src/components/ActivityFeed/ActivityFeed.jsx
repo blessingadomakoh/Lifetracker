@@ -38,20 +38,23 @@
 
 // export default ActivityFeed;
 
-import React from 'react';
-import './ActivityFeed.css'; // add a CSS import here
+import React, { useContext } from 'react';
+import CaloriesContext from '../CaloriesContext';
+import './ActivityFeed.css'; 
 
 const ActivityFeed = () => {
+  const { averageDailyCalories, maxCaloriesOneMeal } = useContext(CaloriesContext);
+
   return (
     <div className="activity-feed">
       <div className="calories-info">
         <div className="box">
           <h4>Average Daily Calories:</h4>
-          <p>125</p>
+          <p>{averageDailyCalories}</p>
         </div>
         <div className="box">
           <h4>Max Calories in One Meal:</h4>
-          <p>125</p>
+          <p>{maxCaloriesOneMeal}</p>
         </div>
       </div>
     </div>
