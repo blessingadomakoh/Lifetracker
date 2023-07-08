@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./NutritionForm.css"
 
 const NutritionForm = ({ onSubmit, appState }) => {
+  const navigate = useNavigate()
   const [name, setName] = useState("");
   const [calories, setCalories] = useState(1);
   const [imageUrl, setImageUrl] = useState("");
   const [category, setCategory] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
   
     if (!name || !calories || !imageUrl || !category) {
@@ -16,7 +18,6 @@ const NutritionForm = ({ onSubmit, appState }) => {
       return;
     }
   
-    console.log("appstate", appState)
     onSubmit({
       name: name,
       calories: calories,
@@ -24,12 +25,10 @@ const NutritionForm = ({ onSubmit, appState }) => {
       category: category,
       user_id: appState.user.id 
     })
-      .then(() => {
-        setName("");
-        setCalories(1);
-        setImageUrl("");
-        setCategory("");
-      })
+    .then(
+      navigate("/nutrition")
+    )
+    
       .catch((error) => {
         setError(error.message);
       });

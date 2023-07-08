@@ -5,6 +5,7 @@ import NutritionNew from '../NutritionNew/NutritionNew';
 import NutritionDetail from '../NutritionDetail/NutritionDetail';
 import NotFound from '../NotFound/NotFound';
 import "./NutritionPage.css"
+import apiClient from '../../services/apiClient'; 
 
 const NutritionPage = ({ appState, setAppState }) => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const NutritionPage = ({ appState, setAppState }) => {
   useEffect(() => {
     const fetchAllNutrition = async () => {
       try {
-        const token = localStorage.getItem("lifetracker_token");
+        const token = localStorage.getItem("token");
         if (token) {
           apiClient.setToken(token);
           const userId = appState.user.id;

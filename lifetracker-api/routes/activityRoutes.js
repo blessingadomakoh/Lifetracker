@@ -1,23 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
-const verifyToken = require('../middleware/verifyToken');  // assuming this is where you saved your verifyToken middleware
+const verifyToken = require('../middleware/verifyToken');  
 const Activity = require('../models/activity');
 
 
-// GET /activity/:id endpoint
-router.get('/:id', async (req, res, next) => {
+router.get('/', verifyToken, async (req, res, next) => {
     try {
-        const id = req.params.id;
+        const {userId} = res.locals.user;
 
-        const totalCaloriesPerDay = await Activity.calculateDailyCaloriesSummaryStats(id);
-        const avgCaloriesPerCategory = await Activity.calculatePerCategoryCaloriesSummaryStats(id);
+        const totalCaloriesPerDay = await Activity.calculateDailyCaloriesSummaryStats(userId);
+        const avgCaloriesPerCategory = await Activity.calculatePerCategoryCaloriesSummaryStats(userId);
 
         res.json({ totalCaloriesPerDay: [totalCaloriesPerDay], avgCaloriesPerCategory: [avgCaloriesPerCategory] });
     } catch (err) {
+        console.error("errrrrorrrr", err.stack);
         next(err);
     }
 });
+
 
 
 

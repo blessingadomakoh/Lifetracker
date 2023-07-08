@@ -11,7 +11,7 @@ router.post('/', async (req, res, next) => {
 
         res.status(201).json({
             message: "Nutrition record created successfully",
-            nutritionRecord,
+            createdRecord,
         });
     } catch (err) {
         next(err);
@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
     try {
         const user_id = req.query.user_id;
         const nutritionRecords = await User.getAllNutrition(user_id);
-  
+        console.log("get all nut records", user_id, nutritionRecords)
       res.status(200).json({
         message: "Nutrition records fetched successfully",
         nutritionRecords,
@@ -35,7 +35,7 @@ router.get('/', async (req, res, next) => {
   
 
 // Update a nutrition record
-router.put('/:id', async (req, res, next) => {
+router.put('/id', async (req, res, next) => {
     try {
         const { id } = req.params;
         const nutritionRecord = { id, ...req.body };
@@ -51,7 +51,7 @@ router.put('/:id', async (req, res, next) => {
 });
 
 // Delete a nutrition record
-router.delete('/:id', async (req, res, next) => {
+router.delete('/id', async (req, res, next) => {
     try {
         const { id } = req.params;
         const deleteRecord = await User.deleteNutrition(id);

@@ -7,6 +7,8 @@ class ApiClient {
     this.token = null;
   }
 
+
+
   setToken(token) {
     this.token = token;
   }
@@ -22,8 +24,11 @@ class ApiClient {
       headers["Authorization"] = `Bearer ${this.token}`;
     }
 
+    const params = (method === "GET") ? data : {}
+
+
     try {
-      const res = await axios({ url, method, data, headers });
+      const res = await axios({ url, method, data, params, headers });
       return { data: res.data, error: null };
     } catch (error) {
       console.error("APIclient.makeRequest.error", error);
@@ -39,7 +44,7 @@ class ApiClient {
     return this.request({ endpoint: "auth/register", method: "POST", data: credentials });
   }
 
-  async fetchUserFromToken() {
+  async fetchUserByEmail() {
     return this.request({ endpoint: "auth/me", method: "GET" });
   }
 
@@ -82,17 +87,12 @@ class ApiClient {
     return response.data;
   }
 
+
   async fetchActivityData(userId) {
-    return fetch(`api/activity/${userId}`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.token}` // if you're using token-based authentication
-      },
-    }).then(res => res.json());
-  }
-  
-  
-  
+    const endpoint = `api/activity/${userId}`;
+    const response = await this.request({ endpoint, method: "GET" });
+    return response;
+} 
   
 }
   

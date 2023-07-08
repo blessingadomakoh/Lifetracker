@@ -13,7 +13,7 @@ const NutritionNew = ({ appState, setAppState }) => {
         }));
       }
     } catch (error) {
-      console.error("Error adding new nutrition record: ", error);
+      console.error("Error adding new nutrition record: ", error.message);
     }
   };
 

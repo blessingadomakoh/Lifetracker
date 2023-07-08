@@ -13,7 +13,7 @@ const verifyToken = (req, res, next) => {
             return res.status(403).json({ error: "Invalid or expired token" });
         }
 
-        req.user = user; // Add user payload to request object
+        res.locals.user = user; // Add user payload to request object
         next(); // Continue to next middleware function or route handler
     });
 };

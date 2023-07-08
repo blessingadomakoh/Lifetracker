@@ -15,10 +15,11 @@ import NotFound from '../NotFound/NotFound';
 
 
 function App( {handleLogout}) {
-  const [loggedIn, setLoggedIn] = useState(false);
+  // const [loggedIn, setLoggedIn] = useState(false);
   const [loginError, setLoginError] = useState("");
   const [registrationError, setRegistrationError] = useState("");
   const [userName, setUserName] = useState()
+  const [userId, setUserId] = useState();
   const [appState, setAppState] = useState({
     user: {},
     isAuthenticated: false,
@@ -27,14 +28,13 @@ function App( {handleLogout}) {
     exercise: [],
     activityData: {}
   });
-
   useEffect(() => {
     const fetchUser = async () => {
       const token = localStorage.getItem("lifetracker_token");
       if (token) {
         apiClient.setToken(token);
   
-        const { data } = await apiClient.fetchUser();
+        const  data  = await apiClient.fetchUserByEmail();
         if (data) {
           const activityRes = await apiClient.fetchActivityData(data.user.id);
           if(activityRes.data) {
@@ -58,41 +58,8 @@ function App( {handleLogout}) {
   
     fetchUser();
   }, [appState.isAuthenticated]);
-  
-  
 
-const [nutritionRecords, setNutritionRecords] = useState([]);
 
-useEffect(() => {
-  const fetchNutrition = async () => {
-      const { data, error } = await apiClient.fetchAllNutrition();
-      if (data) setNutritionRecords(data.nutrition);
-      if (error) console.error(error);
-  };
-  fetchNutrition();
-}, []);
-
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     const token = localStorage.getItem("lifetracker_token");
-  //     if (token) {
-  //       apiClient.setToken(token);
-
-  //       const { data } = await apiClient.fetchUser();
-  //       if (data) {
-  //         setAppState(prevState => ({
-  //           ...prevState,
-  //           user: data.user,
-  //           token: token,
-  //           isAuthenticated: true,
-  //           nutrition: data.nutrition,
-  //         }));
-  //       }
-  //     }
-  //   };
-
-  //   fetchUser();
-  // }, [appState.isAuthenticated]);
 
   useEffect(() => {
     const checkLoggedIn = () => {
@@ -102,9 +69,14 @@ useEffect(() => {
         //decode the stored token
         const decodedToken = jwtDecode(token);
         setUserName(decodedToken.userName);
+        setUserId(decodedToken.userId);
+        apiClient.setToken(token)
 
         if (decodedToken.exp * 1000 > Date.now()) {
-          setLoggedIn(true);
+          setAppState(prevState => ({
+            ...prevState, 
+            isAuthenticated: true,
+          }))
         } else {
           //Token has expired, log out the user
           handleLogout();
@@ -128,17 +100,18 @@ useEffect(() => {
       const data = await response.json();
 
       if (response.status === 200) {
-        // const { token } = response.data;
         const { token } = data;
         const { user } = data;
         setAppState(previousState => ({
             ...previousState, user: user
         }))
-        console.log("useeerrr", user)
         localStorage.setItem("token", token);
 
         //Successful Login
-        setLoggedIn(true);
+        setAppState(prevState => ({
+          ...prevState, 
+          isAuthenticated: true
+        }))
         setLoginError("");
         console.log(data.message); //optional - display a success message
         console.log(data.user.name); //another way to get the username
@@ -181,7 +154,10 @@ useEffect(() => {
         setUserName(decodedToken.userName);
 
         //Registration successful
-        setLoggedIn(true);
+        setAppState(prevState => ({
+          ...prevState, 
+          isAuthenticated: true
+        }))
         console.log(data.message); //optional - display a success message
       } else {
         //Registration failed
@@ -195,15 +171,15 @@ useEffect(() => {
   return (
     <div className="app">
       <Router>
-        <Navbar loggedIn={loggedIn} />
+        <Navbar loggedIn={appState.isAuthenticated} />
 
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route
             path="/login"
             element={
-              loggedIn ? (
-                <LoginPage loggedIn={loggedIn} onLogin={handleLogin} loginError={loginError} />
+              appState.isAuthenticated ? (
+                <LoginPage loggedIn={appState.isAuthenticated} onLogin={handleLogin} loginError={loginError} />
               ) : (
                 <LoginForm onLogin={handleLogin} error={loginError} />
               )
@@ -212,8 +188,8 @@ useEffect(() => {
           <Route
             path="/register"
             element={
-              loggedIn ? (
-                <RegistrationPage loggedIn={loggedIn} onRegister={handleRegistration} registrationError={registrationError} />
+              appState.isAuthenticated ? (
+                <RegistrationPage loggedIn={appState.isAuthenticated} onRegister={handleRegistration} registrationError={registrationError} />
               ) : (
                 <RegistrationForm onRegister={handleRegistration} error={registrationError} />
               )
@@ -222,7 +198,7 @@ useEffect(() => {
          <Route
   path="/activity"
   element={
-    loggedIn ? 
+    appState.isAuthenticated ? 
       <ActivityPage activityData={appState.activityData} setAppState={setAppState} /> 
       : <AccessForbidden />
   }
@@ -231,7 +207,7 @@ useEffect(() => {
           <Route
             path="/nutrition/*"
             element={
-              loggedIn ? <NutritionPage appState={appState} setAppState={setAppState} /> : <AccessForbidden />
+              appState.isAuthenticated ? <NutritionPage appState={appState} setAppState={setAppState} /> : <AccessForbidden />
             }
           />
 

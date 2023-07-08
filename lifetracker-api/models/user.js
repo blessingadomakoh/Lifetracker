@@ -90,6 +90,7 @@ class User {
 
     static createNutrition = async ({name, category, calories, image_url, user_id}) => {
         try {
+            console.log("nutrition")
             const query = `
                 INSERT INTO nutrition (name, category, calories, image_url, user_id) 
                 VALUES ($1, $2, $3, $4, $5) 
@@ -141,21 +142,35 @@ class User {
         }
     }; 
     
-    static getAllNutrition = async (user_id) => {
-        try {
-            const query = `SELECT * FROM nutrition WHERE user_id = $1`;
-            const result = await db.query(query, [user_id]);
-            return result.rows;
-        } catch (error) {
-            console.error("Error fetching all nutrition records: ", error);
-            throw new BadRequestError("Error fetching all nutrition records.");
-        }
+    static async getAllNutrition (id) {
+            const nutrition = await db.query (
+                `SELECT * FROM nutrition WHERE user_id = $1 ORDER BY created_at DESC`, [id]) ;
+
+                const getAllNutrition = nutrition.rows
+
+                return getAllNutrition
+    //         const result = await db.query(query, [id]);
+    //         return result.rows;
+    //     } catch (error) {
+    //         console.error("Error fetching all nutrition records: ", error);
+    //         throw new BadRequestError("Error fetching all nutrition records.");
+    //     }
     };
+
     
     
     
 };
 
 module.exports = User;
+
+// async fetchActivityData(userId) {
+//     return fetch(`api/activity/${userId}`, {
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Authorization': `Bearer ${this.token}` // if you're using token-based authentication
+//       },
+//     }).then(res => res.json());
+//   }
 
 

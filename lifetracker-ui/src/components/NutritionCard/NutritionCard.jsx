@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 const NutritionCard = ({ nutrition }) => {
   const {
@@ -8,10 +9,22 @@ const NutritionCard = ({ nutrition }) => {
     category,
     createdAt,
   } = nutrition;
+
+
   
-  const formatDate = (dateStr) => {
-    const date = new Date(dateStr);
-    return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
+  const formatDate = createdAt => {
+
+    const dates = moment(createdAt)
+    let day = dates.date()
+    day = String(day).padStart(2, '0')
+    const month = dates.month()
+    const year = dates.year()
+
+    createdAt = `${month}/${day}/${year}`
+
+    return createdAt
+    // const date = new Date(dateStr);
+    // return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
   };
   
   return (
