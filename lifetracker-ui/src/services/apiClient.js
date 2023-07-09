@@ -3,7 +3,7 @@ import { API_BASE_URL } from "../constants";
 
 class ApiClient {
   constructor(remoteHostUrl) {
-    this.remoteHostUrl = remoteHostUrl;
+    remoteHostUrl = "https://lifetracker-backend-d41r.onrender.com";
     this.token = null;
   }
 
