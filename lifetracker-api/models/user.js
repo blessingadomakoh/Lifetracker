@@ -149,12 +149,6 @@ class User {
                 const getAllNutrition = nutrition.rows
 
                 return getAllNutrition
-    //         const result = await db.query(query, [id]);
-    //         return result.rows;
-    //     } catch (error) {
-    //         console.error("Error fetching all nutrition records: ", error);
-    //         throw new BadRequestError("Error fetching all nutrition records.");
-    //     }
     };
 
     
@@ -164,13 +158,6 @@ class User {
 
 module.exports = User;
 
-// async fetchActivityData(userId) {
-//     return fetch(`api/activity/${userId}`, {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Authorization': `Bearer ${this.token}` // if you're using token-based authentication
-//       },
-//     }).then(res => res.json());
-//   }
+
 
 
