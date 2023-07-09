@@ -14,7 +14,7 @@ class ApiClient {
   }
 
   async request({ endpoint, method, data = {} }) {
-    const url = `${this.remoteHostUrl}/${endpoint}`;
+    const url = `${remoteHostUrl}/${endpoint}`;
 
     const headers = {
       "Content-Type": "application/json",
@@ -56,7 +56,7 @@ class ApiClient {
   
   
   async createNutrition(nutritionData) {
-    const url = `${this.remoteHostUrl}/api/nutrition`;
+    const url = `${remoteHostUrl}/api/nutrition`;
     const response = await axios.post(url, nutritionData, {
       headers: {
           'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ class ApiClient {
   }
   
   async updateNutrition(id, nutritionData) {
-    const url = `${this.remoteHostUrl}/api/nutrition/${id}`;
+    const url = `${remoteHostUrl}/api/nutrition/${id}`;
     const response = await axios.put(url, nutritionData, {
       headers: {
           'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ class ApiClient {
   }
   
   async deleteNutrition(id) {
-    const url = `${this.remoteHostUrl}/api/nutrition/${id}`;
+    const url = `${remoteHostUrl}/api/nutrition/${id}`;
     const response = await axios.delete(url, {
       headers: {
           'Authorization': `Bearer ${this.token}`,
