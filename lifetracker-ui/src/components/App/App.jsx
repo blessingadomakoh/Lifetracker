@@ -148,6 +148,7 @@ function App( {handleLogout}) {
 
   const handleRegistration = async (username, email, firstName, lastName, password) => {
     try {
+      console.log(`entering handle registration`)
       const response = await fetch("https://lifetracker-backend-d41r.onrender.com/auth/api/register", {
         method: "POST",
         headers: {
@@ -156,21 +157,25 @@ function App( {handleLogout}) {
         body: JSON.stringify({ username, password, first_name: firstName, last_name: lastName, email }),
       });
 
+      console.log(`response: ${response}`)
+
       //wait for the response
       const data = await response.json();
-
+      console.log(`data ${data}`)
       if (response.status === 201) {
+        console.log(`response status : ${response.status}`)
         //get the token information and store in localStorage
         const { token } = data;
         const { user } = data;
         setAppState(previousState => ({
             ...previousState, user: user
         }))
+        console.log(`set app state`)
         localStorage.setItem("token", token);
 
         const decodedToken = jwtDecode(token); //a way to get username from token
         setUserName(decodedToken.userName);
-
+        console.log(`set user name`)
         //Registration successful
         setAppState(prevState => ({
           ...prevState, 
