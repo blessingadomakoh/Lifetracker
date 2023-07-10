@@ -13,7 +13,7 @@ const RegistrationForm = ({ onRegister, error }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log(`entering handle submit`);
     let isValid = true;
 
     if (!email.includes("@")) {
@@ -29,10 +29,14 @@ const RegistrationForm = ({ onRegister, error }) => {
     } else {
       setPasswordError(null);
     }
+    console.log(`no error in handle submit`)
 
     if (isValid) {
+      console.log(`valid input in handle dubmit`)
       onRegister(username, email, firstName, lastName, password);
+      console.log(`testing on register`)
     }
+
   };
 
   return (
