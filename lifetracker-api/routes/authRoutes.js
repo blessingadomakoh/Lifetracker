@@ -23,14 +23,16 @@ router.post('/api/login', async (req, res, next) => {
 
 router.post('/api/register', async (req, res, next) => {
     try {
+        console.log("REGISTER here")
         const { username, password, first_name, last_name, email } = req.body;
         const { token, user } = await User.register(username, password, first_name, last_name, email);
-
+        console.log("REGISTER after user.Register")
         res.status(201).json({
             message: "User registered successfully",
             token : token,
             user: user,
         });
+        console.log("REGISTER status")
     } catch (err) {
         next(err);
     }
