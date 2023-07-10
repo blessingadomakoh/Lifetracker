@@ -107,7 +107,7 @@ function App( {handleLogout}) {
 
   const handleLogin = async (email, password) => {
     try {
-      const response = await fetch("http://localhost:3001/auth/api/login", {
+      const response = await fetch("https://lifetracker-backend-d41r.onrender.com/auth/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -148,7 +148,7 @@ function App( {handleLogout}) {
 
   const handleRegistration = async (username, email, firstName, lastName, password) => {
     try {
-      const response = await fetch("http://localhost:3001/auth/api/register", {
+      const response = await fetch("https://lifetracker-backend-d41r.onrender.com/auth/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -10,7 +10,7 @@ const NutritionDetail = () => {
   const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/nutrition/${nutritionId}`)
+    axios.get(`https://lifetracker-backend-d41r.onrender.com/api/nutrition/${nutritionId}`)
     .then(response => {
         setNutrition(response.data);
         setIsLoading(false);
